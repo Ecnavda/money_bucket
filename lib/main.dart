@@ -213,6 +213,7 @@ class SettingsPage extends StatelessWidget {
 
 class AccountInfo extends StatelessWidget {
 
+  /*
   Widget blueBox =Container(
     width: 350,
     height: 440,
@@ -225,17 +226,56 @@ class AccountInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(8)
     ),
   );
+  */
 
-  Widget buckets = Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Image.asset('assets/new-b1.png'),
-        Image.asset('assets/new-b2.png'),
-        Image.asset('assets/new-b3.png'),
-      ],
-    )
+  Widget blueBox =Container(
+    width: 350,
+      height: 440,
+      decoration: BoxDecoration(
+          color: const Color(0xFFE8E8E8),
+          border: Border.all(
+              color: const Color(0xFFE8E8E8),
+              width: 2
+          ),
+          borderRadius: BorderRadius.circular(8)
+      ),
+      child: Text(
+        'Account Info: \n\nAvailable founds:    \t874.52 \n\nLast amount saved: \t1.62 \n',
+        style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+
+      )),
   );
+
+  Widget buckets(context) {
+    return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BucketPage()),
+                );
+              },
+              child: Image.asset("assets/new-b1.png"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BucketPage()),
+                );
+              },
+              child: Image.asset("assets/new-b2.png"),
+            ),
+            Image.asset('assets/new-b3.png'),
+          ],
+        )
+    );
+  }
 
   Widget titleSection = Container(
     padding: const EdgeInsets.all(32),
@@ -285,7 +325,7 @@ class AccountInfo extends StatelessWidget {
         children: <Widget>[
           titleSection,
           blueBox,
-          buckets,
+          buckets(context),
 
         ],
       ),
@@ -407,23 +447,6 @@ class _LandingPageState extends State<LandingPage> {
   }
 }
 
-class Account extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Account"),
-      ),
-      body: Column(
-        children: [
-          Text("Test"),
-        ],
-      ),
-    );
-  }
-}
-
 class RegistrationPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final fireAuth = FirebaseAuth.instance;
@@ -487,15 +510,103 @@ class RegistrationPage extends StatelessWidget {
   }
 }
 
-class SavingPreferencesPage extends StatefulWidget {
-  @override
-  _SavingPreferencesPageState createState() => _SavingPreferencesPageState();
-}
+class BucketPage extends StatelessWidget {
+  Widget blueBox = Container(
+    width: 350,
+    height: 440,
+    decoration: BoxDecoration(
+        color: const Color(0xFFE8E8E8),
+        border: Border.all(
+            color: const Color(0xFFE8E8E8),
+            width: 2
+        ),
+        borderRadius: BorderRadius.circular(8)
+    ),
+    child: Column(
 
-class _SavingPreferencesPageState extends State<SavingPreferencesPage> {
+      children: [
+        Text("House Savings\n", style: TextStyle(fontSize: 50, color: Colors.green,),),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Goal", style: TextStyle(fontSize: 30)),
+            Text("\$10,000.00", style: TextStyle(fontSize: 30)),
+          ]
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Current", style: TextStyle(fontSize: 30),),
+            Text("\$4,320.66", style: TextStyle(fontSize: 30),),
+          ],
+        ),
+      ],
+    ),
+  );
+
+  Widget buckets = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset('assets/new-b1.png'),
+          //Image.asset('assets/new-b2.png'),
+          //Image.asset('assets/new-b3.png'),
+        ],
+      )
+  );
+
+  Widget titleSection = Container(
+    padding: const EdgeInsets.all(32),
+    child: Row(
+      children: [
+        Expanded(
+          /*1*/
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /*2*/
+              Container(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+
+                  '\nHi Jerge',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color:const Color(0xFF041B15) ,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Text(
+                'Kandersteg, Switzerland',
+                style: TextStyle(
+                  color: Colors.grey[500],
+                ),
+              ),
+            ],
+          ),
+        ),
+        /*3*/
+
+        Gear(),
+      ],
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      //appBar: AppBar(
+      //title: Text("Money Bucket"),
+      // ),
+      body: Column(
+        children: <Widget>[
+          titleSection,
+          blueBox,
+          buckets,
+
+        ],
+      ),
+    );
   }
 }
-
